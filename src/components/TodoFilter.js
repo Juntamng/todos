@@ -1,13 +1,14 @@
 import React from 'react'
-import {Status} from '../utils/constant'
+import {VisibilityFilters, setVisibilityFilter} from '../actions'
+import {connect} from 'react-redux'
 
-const TodoFilter = ({onFilter}) => (
+const TodoFilter = ({dispatch}) => (
     <div>
         Show {' '}
-        <button onClick={()=>onFilter(Status.ALL)}>All</button>{' '}
-        <button onClick={()=>onFilter(Status.ACTIVE)}>Active</button>{' '} 
-        <button onClick={()=>onFilter(Status.COMPLETED)}>Completed</button>
+        <button onClick={()=>dispatch(setVisibilityFilter(VisibilityFilters.ALL))}>All</button>{' '}
+        <button onClick={()=>dispatch(setVisibilityFilter(VisibilityFilters.ACTIVE))}>Active</button>{' '} 
+        <button onClick={()=>dispatch(setVisibilityFilter(VisibilityFilters.COMPLETED))}>Completed</button>
     </div>
 )
 
-export default TodoFilter
+export default connect()(TodoFilter)

@@ -1,8 +1,10 @@
 import React from 'react'
+import {toggleTodo} from '../actions'
+import {connect} from 'react-redux'
 
-const Todo = ({id, text, completed, onComplete}) => (
+const Todo = ({id, text, completed, dispatch}) => (
     <li
-        onClick={()=>onComplete(id)}
+        onClick={()=>dispatch(toggleTodo(id))}
         style={{
             textDecoration: completed ? 'line-through': 'none'
         }}
@@ -11,4 +13,4 @@ const Todo = ({id, text, completed, onComplete}) => (
     </li>
 )
 
-export default Todo
+export default connect()(Todo)

@@ -1,6 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { addTodo } from '../actions'
 
-const TodoAdd = ({onAddTodo}) => {
+const TodoAdd = ({dispatch}) => {
     let input
 
     const handleSubmit = (e) => {
@@ -9,8 +11,8 @@ const TodoAdd = ({onAddTodo}) => {
             return
         }
 
-        onAddTodo(input.value)
-        input.value = "";
+        dispatch(addTodo(input.value))
+        input.value = ''
     }
 
     return (
@@ -23,4 +25,4 @@ const TodoAdd = ({onAddTodo}) => {
     )
 }
 
-export default TodoAdd
+export default connect()(TodoAdd)

@@ -1,24 +1,31 @@
 import React from 'react'
 import Todo from './Todo'
-import {Status} from '../utils/constant'
+import {VisibilityFilters} from '../actions'
+import { connect } from 'react-redux'
 
 const getFilterTodos = (todos, filter) => {
     switch(filter) {
-        case Status.ALL:
+        case VisibilityFilters.ALL:
             return todos;
-        case Status.ACTIVE:
+        case VisibilityFilters.ACTIVE:
             return todos.filter(val => !val.completed)
-        case Status.COMPLETED:
+        case VisibilityFilters.COMPLETED:
             return todos.filter(val => val.completed)
         default:
             throw new Error('Unknown filter: ' + filter)
     }
 }
 
-const TodoList = ({todos, filter, onComplete}) => (
+const mapStateToProps = state => ({
+    todos: getFilterTodos(state.todos, state.visibilityFilter)
+})
+
+const TodoList = ({todos}) => (
     <ul>
-    { getFilterTodos(todos, filter).map(todo => <Todo key={todo.id} onComplete={onComplete} {...todo} />) }
+    { todos.map(todo => <Todo key={todo.id} {...todo} />) }
     </ul>
 )
 
-export default TodoList
+export default connect(
+    mapStateToProps
+)(TodoList)
