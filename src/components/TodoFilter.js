@@ -2,13 +2,19 @@ import React from 'react'
 import {VisibilityFilters, setVisibilityFilter} from '../actions'
 import {connect} from 'react-redux'
 
-const TodoFilter = ({dispatch}) => (
+const TodoFilter = ({dispatch, selectAll, selectActive, selectCompleted}) => (
     <div>
         Show {' '}
-        <button onClick={()=>dispatch(setVisibilityFilter(VisibilityFilters.ALL))}>All</button>{' '}
-        <button onClick={()=>dispatch(setVisibilityFilter(VisibilityFilters.ACTIVE))}>Active</button>{' '} 
-        <button onClick={()=>dispatch(setVisibilityFilter(VisibilityFilters.COMPLETED))}>Completed</button>
+        <button onClick={selectAll}>All</button>{' '}
+        <button onClick={selectActive}>Active</button>{' '} 
+        <button onClick={selectCompleted}>Completed</button>
     </div>
 )
 
-export default connect()(TodoFilter)
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    selectAll: () => dispatch(setVisibilityFilter(VisibilityFilters.ALL)),
+    selectActive: () => dispatch(setVisibilityFilter(VisibilityFilters.ACTIVE)),
+    selectCompleted: () => dispatch(setVisibilityFilter(VisibilityFilters.COMPLETED))
+})
+
+export default connect(null, mapDispatchToProps)(TodoFilter)
