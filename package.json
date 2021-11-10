@@ -9,6 +9,7 @@
     "eject": "react-scripts eject",
     "test": "react-scripts test --env=node"
   },
+  "proxy": "http://localhost:3001",
   "keywords": [],
   "author": "",
   "license": "ISC",
